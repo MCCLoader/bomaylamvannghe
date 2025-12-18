@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>W loserfuture</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .soundboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 600px;
+    }
+    .sound-button {
+      background: #6200ea;
+      border: none;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+    .sound-button:hover {
+      background: #3700b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>W loserfuture</h1>
+  <div class="soundboard">
+    <button class="sound-button" onclick="toggleSound('opening')">opening</button>
+    <button class="sound-button" onclick="toggleSound('call')">call</button>
+    <button class="sound-button" onclick="toggleSound('batdimedi')">batdimedi</button>
+    <button class="sound-button" onclick="toggleSound('datcauhoi')">datcauhoi</button>
+    <button class="sound-button" onclick="toggleSound('hetphim')">hetphim</button>
+    <button class="sound-button" onclick="toggleSound('tayduki')">tayduki</button>
+    <button class="sound-button" onclick="toggleSound('traogiai')">traogiai</button>
+    <button class="sound-button" onclick="toggleSound('visaoconkhoc')">visaoconkhoc</button>
+  </div>
+
+  <script>
+    let currentAudio = null;
+    let currentSound = null;
+
+    function toggleSound(name) {
+      if (currentSound === name && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentSound = null;
+      } else {
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio.currentTime = 0;
+        }
+        currentAudio = new Audio('./sounds/' + name + '.mp3');
+        currentAudio.play();
+        currentSound = name;
+      }
+    }
+  </script>
+
+</body>
+</html>
